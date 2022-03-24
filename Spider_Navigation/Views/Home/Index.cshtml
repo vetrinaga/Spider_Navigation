@@ -1,0 +1,95 @@
+﻿@model Spider_Navigation.Models.ViewModel.IOViewModel 
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="lead">
+    <p>
+        This is a spidar navigation tool to explore microfractures on the wall of a building!
+    <p>In order to control the spider, please provide the inputs as follows.</p>
+    <p> 1. Size of the wall</p>
+    <p> 2. Current Position </p>
+    <p> 3. Instructions. </p>
+</div>
+
+<div style="display: table;">
+    <div style="display: table-row">
+        <div style="width:900px;float:left;clear:left">
+
+            @using (Html.BeginForm("Index", "Home", new { @class = "form-horizontal", role = "form" }))
+
+            {
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Input.RectX, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Input.RectX, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Input.RectY, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Input.RectY, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Input.SpidX, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Input.SpidX, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Input.SpidY, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Input.SpidY, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Input.SpidDirection, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Input.SpidDirection, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Input.Instrctions, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Input.Instrctions, new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Calculate co-ordinates" class="btn btn-primary" />
+
+                    </div>
+                </div>
+
+
+            }
+        </div>
+        <div style="width:200px;float:right;clear:right;">
+
+            @if (Model.Output.Direction != null)
+            {
+                <div class="alert alert-dismissible alert-info">
+                    <p> The co-ordinates are:</p>
+                    <label>@Html.DisplayFor(m => m.Output.X)</label>
+                    <label>@Html.DisplayFor(m => m.Output.Y)</label>
+                    <label>@Html.DisplayFor(m => m.Output.Direction)</label>
+                </div>
+            }
+        </div>
+
+    </div>
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
